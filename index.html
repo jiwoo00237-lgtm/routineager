@@ -1,0 +1,447 @@
+<!doctype html>
+<!-- 이 페이지의 언어는 한국어(ko)입니다 -->
+<html lang="ko">
+<!-- head: 화면에는 보이지 않는 페이지 설정을 적는 곳 -->
+<head>
+  <!-- 한글이 깨지지 않게 하는 글자 설정 -->
+  <meta charset="utf-8">
+  <!--
+    ===================================================================
+    index.html : 페이지의 뼈대 파일
+
+    - 이 파일은 화면에 어떤 내용이 어떤 순서로 나오는지 정합니다.
+    - 색상과 배치는 style.css(첫 화면은 hero.css), 버튼을 눌렀을 때의 동작은 script.js(첫 화면 메뉴는 hero.js)에 있습니다.
+    - class 이름 중 row, col-md-6, btn, modal 등은 Bootstrap이 미리 만들어 둔 이름입니다.
+    - id는 페이지 안에서 하나뿐인 이름표입니다. script.js가 이 id로 요소를 찾으니,
+      id를 바꾸면 script.js도 같이 바꿔야 합니다.
+    - 비어 있는 칸(taskList, quizBox)은
+      script.js가 내용을 채워 넣습니다.
+
+    페이지 순서: 첫 화면(헤더 포함) > 다섯 손가락 체험 > ADHD력 테스트
+                 > 이용 방법 > 푸터 (+ 팝업 3개)
+    ===================================================================
+  -->
+  <!-- 휴대폰에서도 화면 폭에 맞게 보이게 하는 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 브라우저 탭에 보이는 제목 -->
+  <title>루틴에이저</title>
+
+  <!-- Bootstrap 5.3.3 디자인 파일 (인터넷에서 불러오기) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- 우리가 직접 꾸민 디자인 파일 -->
+  <link href="style.css" rel="stylesheet">
+  <!-- 첫 화면 디자인 파일과 글꼴: 공통 디자인 파일 다음에 연결 -->
+  <link href="hero.css" rel="stylesheet">
+  <!-- 브라우저 탭 아이콘 -->
+  <link rel="icon" type="image/png" href="images/favicon-user-cream.png">
+</head>
+<!-- body: 여기부터 실제로 화면에 보이는 내용 -->
+<body>
+
+  <!-- main: 페이지의 본문 영역 (섹션 1~4) -->
+  <main>
+
+    <!-- ===================== 섹션 1: 첫 화면 ===================== -->
+    <!-- ============================================================
+         [지현 담당 메인 시작] section#hero만 기존 메인과 교체합니다.
+         CSS: hero.css / JS: hero.js / 이미지: images/ / 폰트: fonts/
+         ra- 접두사는 다른 팀원 스타일·동작과 충돌을 줄이기 위한 이름입니다.
+         ============================================================ -->
+    <section id="hero" class="ra-hero" aria-labelledby="ra-title">
+      <a class="ra-skip" href="#try">루틴 체험으로 바로 가기</a>
+      <!-- [지현 메인 01] 헤더: Bootstrap 메뉴 / 기존 팀 섹션·모달 ID 연결 -->
+      <nav class="navbar navbar-expand-lg ra-nav" aria-label="주 메뉴">
+        <div class="container-fluid ra-nav-inner">
+          <a class="ra-brand" href="#hero" aria-label="Routineager 처음으로">
+            <img class="ra-brand-image" src="images/logo-user-cream.png" width="1600" height="380" alt="Routineager" decoding="async">
+          </a>
+          <button class="navbar-toggler ra-menu-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#raMenu" aria-controls="raMenu" aria-expanded="false" aria-label="메뉴 열기">
+            <span aria-hidden="true">☰</span>
+          </button>
+          <div class="collapse navbar-collapse" id="raMenu">
+            <ul class="navbar-nav ra-menu ms-auto">
+              <li class="nav-item"><a class="ra-nav-link" href="#about">이용 방법</a></li>
+              <li class="nav-item"><a class="ra-nav-link" href="#try">리워드</a></li>
+              <li class="nav-item"><button class="ra-nav-link" type="button" data-bs-toggle="modal" data-bs-target="#raLoginModal">로그인</button></li>
+              <li class="nav-item"><button class="ra-nav-signup" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">서비스 가입</button></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="ra-canvas">
+        <!-- [지현 메인 02] 핵심 제목: LINE Seed KR Bold. 제목 크기는 축소하지 않습니다. -->
+        <div class="ra-copy">
+          <p class="ra-eyebrow">오늘도 미루고, 집중이 어렵다면?<span aria-hidden="true"></span></p>
+          <h1 id="ra-title" class="ra-title"><span class="ra-title-lead"><strong>작은 루틴</strong>이</span><span class="ra-title-focus"><em>큰 변화</em>를 만든다.</span></h1>
+          <!-- [지현 메인 03 시작] A 리워드 티켓: 승인 시안 대비 가로·세로 95%.
+               배경/테두리/찢김/손바닥 로고는 PNG, 문구는 지정 폰트의 HTML입니다.
+               문구 수정: 아래 두 span / 크기 수정: hero.css의 --ra-ticket-scale. -->
+          <div class="ra-ticket">
+            <div class="ra-ticket-art" aria-hidden="true">
+              <img src="images/reward-ticket-a.png" width="2098" height="749" alt="" decoding="async">
+            </div>
+            <p class="ra-ticket-copy">
+              <span class="ra-ticket-context">루틴 5개 손가락 접고,</span>
+              <span class="ra-ticket-reward">오늘 저녁은 치킨이닭!</span>
+            </p>
+          </div>
+          <!-- [지현 메인 03 끝] A 리워드 티켓 -->
+          <!-- [지현 메인 04] 설명·행동 버튼: #try는 팀 루틴, #signupModal은 팀 가입 모달 -->
+          <p class="ra-description">나에게 맞는 루틴으로 부담 없이 시작하고,<br class="ra-desktop-break">실천할수록 리워드가 쌓이는 루틴 관리 서비스.</p>
+          <div class="ra-actions">
+            <a class="ra-button ra-button-primary" href="#try">지금 시작하기 <span aria-hidden="true">→</span></a>
+            <button class="ra-button ra-button-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">서비스 가입</button>
+          </div>
+        </div>
+        <!-- [지현 메인 05] 완성 일러스트: 노트 글씨·체크/손 고리/컵 로고를 포함한 한 장 -->
+        <div class="ra-art">
+          <!-- 노트 글씨/체크, 손/고리, 컵 로고를 한 이미지 안에서 완성해 배치합니다. -->
+          <img class="ra-scene" src="images/scene-complete-v5.webp" width="1254" height="1254" alt="빛 고리가 손목을 감싼 두 손가락 포즈와 손바닥 체크 로고가 인쇄된 치킨 컵. 오늘의 루틴 다섯 개 중 책상 정리하기, 3분 스트레칭, 집중 20분하기는 완료했고 물 한 잔 마시기, 준비물 챙기기는 미완료입니다." fetchpriority="high" decoding="async">
+        </div>
+      </div>
+    </section>
+    <!-- [지현 담당 메인 끝] 다른 팀원 섹션은 이 뒤에 유지하세요. -->
+
+    <!-- ===================== 섹션 2: 다섯 손가락 루틴 체험 ===================== -->
+    <section id="try" class="section section-teal">
+      <div class="container">
+        <!-- 섹션 머리말: 영문 소제목, 큰 제목, 설명 -->
+        <div class="section-head">
+          <p class="section-eyebrow" lang="en">REWARDS &amp; BADGES</p>
+          <h2 class="section-title">작은 성공이 쌓이면<br>특별한 선물이 기다려요!</h2>
+          <p class="section-text">할 일을 끝냈다면, 칸을 눌러 손가락을 접어 보세요.</p>
+        </div>
+
+        <!-- 가운데 큰 손 주위에 할 일 5칸을 배치. 칸 위치는 style.css에서 조정 -->
+        <div class="finger-board">
+          <!-- 할 일 칸은 script.js가 만듦 -->
+          <div id="taskList" class="task-list"></div>
+
+          <div class="hand-box">
+            <!-- 임시 손 그림 (SVG). 손 이미지 6장을 쓰는 동안은 숨겨짐 -->
+            <svg id="handSvg" class="hand-svg" viewBox="-24 20 240 270" role="img" aria-label="접힌 손가락 0개">
+                <!-- 손가락: 위에서부터 엄지, 검지, 중지, 약지, 새끼 순서로 접힘 -->
+                <!-- 엄지: 옆으로 벌어지도록 35도 기울임 -->
+                <g transform="rotate(-35 75 240)">
+                  <rect class="finger finger-thumb" x="60" y="140" width="30" height="100" rx="15"/>
+                </g>
+                <!-- 검지 -->
+                <rect class="finger" x="62" y="60" width="28" height="110" rx="14"/>
+                <!-- 중지 -->
+                <rect class="finger" x="95" y="40" width="28" height="130" rx="14"/>
+                <!-- 약지 -->
+                <rect class="finger" x="128" y="55" width="28" height="115" rx="14"/>
+                <!-- 새끼손가락 -->
+                <rect class="finger" x="161" y="85" width="28" height="85" rx="14"/>
+                <!-- 손바닥 -->
+                <rect class="palm" x="60" y="150" width="130" height="125" rx="36"/>
+              </svg>
+            <!-- d-none: 숨김 상태. script.js의 handImages에 이미지 6장을 적으면 SVG 대신 이 이미지가 보임 -->
+            <img id="handImage" class="hand-image d-none" src="" alt="">
+            <!-- 진행 상황 -->
+            <p id="handProgress" class="hand-progress" aria-live="polite">0 / 5</p>
+          </div>
+        </div>
+
+        <!-- 아래: 루틴 입력 -->
+        <div class="routine-bar">
+          <!-- form으로 묶으면 추가 버튼과 엔터 키가 같은 동작을 함 / novalidate: 브라우저 기본 경고 대신 우리 안내 문구를 씀 -->
+          <form id="routineForm" class="routine-form" novalidate>
+            <!-- 모든 체크를 해제하는 버튼 (동작은 script.js) -->
+            <button id="resetButton" class="btn btn-outline-cream" type="button">리셋</button>
+            <input id="routineInput" class="form-control" type="text" placeholder="오늘 할 일을 적어 보세요" aria-label="루틴 입력">
+            <button class="btn btn-cream" type="submit">추가</button>
+          </form>
+          <!-- 안내 문구가 나오는 자리 (script.js가 채움) -->
+          <p id="routineMessage" class="routine-message" role="status"></p>
+          <!-- 누르면 ADHD력 테스트 섹션으로 이동 -->
+          <a class="test-link" href="#test">재미로 하는 ADHD력 테스트 해 보기 →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 섹션 3: ADHD력 테스트 ===================== -->
+    <section id="test" class="section section-cream">
+      <div class="container">
+        <!-- 섹션 머리말: 영문 소제목, 큰 제목, 설명 (섹션 2와 같은 형식) -->
+        <div class="section-head">
+          <p class="section-eyebrow" lang="en">ADHD TEST</p>
+          <h2 class="section-title">ADHD력 테스트</h2>
+          <!-- [수정] 설명 문구를 다시 바꿈. 한 문장이라 줄바꿈(<br>)은 뺐고, 화면 폭에 따라 자연스럽게 줄이 바뀜 -->
+          <p class="section-text">나의 집중 습관과 일상 패턴을 살펴보고 루틴으로 극복해요!!</p>
+        </div>
+        <!-- 질문과 결과가 이 칸 안에서 바뀜 (script.js가 채움) -->
+        <div class="quiz-wrap">
+          <!-- [수정] 하얀 칸(quizBox)을 quiz-wrap으로 감싸고, 칸 모서리에 캐릭터 이미지 2개를 추가함.
+               quiz-wrap은 캐릭터를 칸 기준으로 놓기 위한 틀이고, 위치와 크기는 style.css의 .quiz-char 에서 조정함.
+               캐릭터는 꾸밈용이라 alt를 비워 두어 화면 읽기 프로그램이 건너뜀 -->
+          <!-- [수정] 오른쪽 위: 책을 든 구름 캐릭터 (이미지를 바꾸려면 src의 파일 이름을 바꾸면 됨) -->
+          <img class="quiz-char quiz-char-right" src="images/quiz-cloud.png" alt="" width="420" height="306">
+          <!-- [수정] 왼쪽 아래: 민트색 별 캐릭터 -->
+          <img class="quiz-char quiz-char-left" src="images/quiz-star.png" alt="" width="360" height="394">
+          <!-- 질문과 결과가 이 칸 안에서 바뀜 (script.js가 채움). 원래 있던 칸이고, 위의 quiz-wrap 안으로 옮겨짐 -->
+          <div id="quizBox" class="quiz-box" tabindex="-1"></div>
+        </div>
+        <!-- [추가 수정 6] 하얀 칸 아래의 작은 안내 문구. 결과가 중간·높음일 때만 보임 (script.js가 문구를 채움) -->
+        <p id="quizNotice" class="quiz-foot-notice"></p>
+      </div>
+    </section>
+
+    <!-- ===================== 섹션 4: 이용 방법 ===================== -->
+    <section id="about" class="section section-paper">
+      <div class="container">
+        <!-- 섹션 머리말: 섹션 2, 3과 같은 형식 -->
+        <div class="section-head">
+          <p class="section-eyebrow" lang="en">HOW IT WORKS</p>
+          <h2 class="section-title">루틴에이저, 이렇게 이용해요!</h2>
+        </div>
+
+        <!-- 이용 순서 카드 4장: 컴퓨터는 한 줄에 4장, 태블릿은 2장, 휴대폰은 1장 -->
+        <div class="row g-4 mobile-card-gap">
+         
+<div class="col-md-6 col-lg-3">
+  <div class="flip-card" tabindex="0" role="button" aria-pressed="false" aria-label="챌린지 선택 카드 뒤집기">
+    <div class="flip-card-inner">
+
+     <!-- 카드 앞면 -->
+<div class="flip-card-front">
+  <!-- 왼쪽 위 작은 숫자 -->
+  <span class="step-number">01</span>
+ <!-- 첫 번째 카드: 체크리스트 이미지 -->
+<div class="step-icon" aria-hidden="true">
+  <img src="images/challenge.png" alt="">
+</div>
+
+  <h3 class="step-title">챌린지 선택</h3>
+
+  <p class="step-text">
+    관심 있는 챌린지 중 마음에 드는 것을 골라요.
+  </p>
+
+<!-- 설명 아래 작은 직선 화살표 -->
+<span class="flip-hint" aria-hidden="true">
+  <svg width="16" height="7" viewBox="0 0 48 20"
+       fill="none" stroke="currentColor"
+       stroke-width="1.8" stroke-linecap="round"
+       stroke-linejoin="round">
+    <path d="M2 10 H46 M39 3 L46 10 L39 17"/>
+  </svg>
+</span>
+</div>
+
+      <!-- 카드 뒷면 -->
+      <div class="flip-card-back">
+        <div class="step-icon" aria-hidden="true">✨</div>
+        <h3 class="step-title">나만의 시작</h3>
+        <p class="step-text">
+          나에게 맞는 작은 도전을 선택해 보세요!
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+         
+<!-- 02. 하루 5가지 -->
+<div class="col-md-6 col-lg-3">
+  <div class="flip-card" tabindex="0" role="button"
+       aria-pressed="false" aria-label="하루 5가지 카드 뒤집기">
+    <div class="flip-card-inner">
+
+      <!-- 앞면 -->
+      <div class="flip-card-front">
+        <span class="step-number">02</span>
+        <div class="step-icon" aria-hidden="true">
+  <img src="images/hand.png" alt="">
+</div>
+        <h3 class="step-title">하루 5가지</h3>
+        <p class="step-text">작은 도전 다섯 개를 하나씩 완료해요.</p>
+        <!-- 설명 아래 작은 직선 화살표 -->
+<span class="flip-hint" aria-hidden="true">
+  <svg width="16" height="7" viewBox="0 0 48 20"
+       fill="none" stroke="currentColor"
+       stroke-width="1.8" stroke-linecap="round"
+       stroke-linejoin="round">
+    <path d="M2 10 H46 M39 3 L46 10 L39 17"/>
+  </svg>
+</span>
+      </div>
+
+      <!-- 뒷면 -->
+      <div class="flip-card-back">
+        <div class="step-icon" aria-hidden="true">🙌</div>
+        <h3 class="step-title">하나씩 차근차근</h3>
+        <p class="step-text">도전을 완료할 때마다 손가락이 하나씩 접혀요!</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 03. 리워드 받기 -->
+<div class="col-md-6 col-lg-3">
+  <div class="flip-card" tabindex="0" role="button"
+       aria-pressed="false" aria-label="리워드 받기 카드 뒤집기">
+    <div class="flip-card-inner">
+
+      <!-- 앞면 -->
+      <div class="flip-card-front">
+        <span class="step-number">03</span>
+        <div class="step-icon" aria-hidden="true">
+  <img src="images/reward.png" alt="">
+</div>
+        <h3 class="step-title">리워드 받기</h3>
+        <p class="step-text">다섯 손가락을 모두 접으면 보상이 기다려요.</p>
+        <!-- 설명 아래 작은 직선 화살표 -->
+<span class="flip-hint" aria-hidden="true">
+  <svg width="16" height="7" viewBox="0 0 48 20"
+       fill="none" stroke="currentColor"
+       stroke-width="1.8" stroke-linecap="round"
+       stroke-linejoin="round">
+    <path d="M2 10 H46 M39 3 L46 10 L39 17"/>
+  </svg>
+</span>
+      </div>
+
+      <!-- 뒷면 -->
+      <div class="flip-card-back">
+        <div class="step-icon" aria-hidden="true">🎉</div>
+        <h3 class="step-title">도전 성공!</h3>
+        <p class="step-text">다섯 가지 도전을 모두 완료하고 리워드를 받아요!</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 04. 계속 도전하기 -->
+<div class="col-md-6 col-lg-3">
+  <div class="flip-card" tabindex="0" role="button"
+       aria-pressed="false" aria-label="계속 도전하기 카드 뒤집기">
+    <div class="flip-card-inner">
+
+      <!-- 앞면 -->
+      <div class="flip-card-front">
+        <span class="step-number">04</span>
+       <div class="step-icon" aria-hidden="true">
+  <img src="images/badge.png" alt="">
+</div>
+        <h3 class="step-title">계속 도전하기</h3>
+        <p class="step-text">완료 횟수를 쌓아 특별한 배지를 모아 보세요.</p>
+        <!-- 설명 아래 작은 직선 화살표 -->
+<span class="flip-hint" aria-hidden="true">
+  <svg width="16" height="7" viewBox="0 0 48 20"
+       fill="none" stroke="currentColor"
+       stroke-width="1.8" stroke-linecap="round"
+       stroke-linejoin="round">
+    <path d="M2 10 H46 M39 3 L46 10 L39 17"/>
+  </svg>
+</span>
+      </div>
+
+      <!-- 뒷면 -->
+      <div class="flip-card-back">
+        <div class="step-icon" aria-hidden="true">🏆</div>
+        <h3 class="step-title">성장의 기록</h3>
+        <p class="step-text">꾸준히 도전하고 나만의 특별한 배지를 모아 보세요!</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    </section>
+
+  </main>
+
+  <!-- ===================== 푸터 (하단) ===================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <!-- 왼쪽: 로고 / 오른쪽: 브랜드 정보와 안내. 로고는 첫 화면과 같은 이미지 -->
+      <div class="row g-4 align-items-end">
+        <div class="col-lg-8">
+          <img class="footer-logo" src="images/routineager-logo.png" alt="Routine Ager 로고">
+        </div>
+        <div class="col-lg-4">
+          <p class="mb-1">루틴에이저는 청소년의 건강한 루틴을 돕는 서비스입니다.</p>
+          <p class="mb-0">이 페이지의 테스트는 진단이 아닙니다.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== 회원가입 팝업 ===================== -->
+  <!-- modal: Bootstrap 팝업. 평소에는 숨어 있다가 버튼을 누르면 열림 -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="signupTitle">회원가입</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+        </div>
+        <div class="modal-body">
+          <!-- 시연용 입력칸: 입력한 내용은 어디에도 저장되거나 전송되지 않습니다 -->
+          <form id="signupForm">
+            <div class="mb-3">
+              <label class="form-label" for="signupName">이름</label>
+              <input id="signupName" class="form-control" type="text" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="signupEmail">이메일</label>
+              <input id="signupEmail" class="form-control" type="email" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="signupPassword">비밀번호</label>
+              <input id="signupPassword" class="form-control" type="password" autocomplete="new-password" required>
+            </div>
+            <button class="btn btn-teal w-100" type="submit">가입하기</button>
+          </form>
+          <!-- 가입 버튼을 누르면 입력칸 대신 이 문구가 보임 -->
+          <p id="signupDone" class="signup-done d-none" role="status">가입 완료(시연용)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 리워드 팝업 ===================== -->
+  <!-- 루틴 5개를 모두 체크하면 script.js가 이 팝업을 열어 줌 -->
+  <div class="modal fade" id="rewardModal" tabindex="-1" aria-labelledby="rewardTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-body p-4">
+          <h2 class="reward-title" id="rewardTitle">오늘 저녁은 치킨이닭! 🍗</h2>
+          <p>리워드 내용이 들어갑니다. (임시 문구)</p>
+          <button class="btn btn-teal" type="button" data-bs-dismiss="modal">닫기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- [지현 로그인 안내 시작] 팀에 로그인 기능이 생기면 이 블록을 제외하고
+       헤더 로그인 버튼의 data-bs-target을 팀 로그인 모달 ID로 바꿉니다. -->
+  <div class="modal fade ra-preview-modal" id="raLoginModal" tabindex="-1" aria-labelledby="raLoginTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="raLoginTitle">로그인 안내</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+        </div>
+        <div class="modal-body">
+          <p>로그인 기능은 준비 중이에요. 지금은 가입 없이 루틴을 체험해 보세요!</p>
+          <button class="btn btn-teal w-100" type="button" data-bs-dismiss="modal" id="raTryFromLogin">루틴 체험하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [지현 로그인 안내 끝] -->
+
+  <!-- Bootstrap 동작 파일 (팝업에 필요) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- 우리가 직접 만든 동작 파일 -->
+  <script src="script.js"></script>
+  <!-- 첫 화면 메뉴와 로그인 안내 동작 -->
+  <script src="hero.js"></script>
+</body>
+</html>
